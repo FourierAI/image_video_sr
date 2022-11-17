@@ -14,11 +14,10 @@ st.title('图像超分辨率')
 
 uploaded_file = st.file_uploader("请上传图片文件")
 if uploaded_file is not None:
-
-    bytes_data = uploaded_file.getvalue()
     file_name = uploaded_file.name
     if is_im(file_name):
-      
+      bytes_data = uploaded_file.getvalue()
+
       im = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
 
       st.image(im, channels="BGR")
