@@ -18,9 +18,12 @@ if uploaded_file is not None:
     if is_im(file_name):
       bytes_data = uploaded_file.getvalue()
 
-      im = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
-
-      st.image(im, channels="BGR")
+      try:
+        im = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
+        st.image(im, channels="BGR")
+      except Exception:
+        e = RuntimeError('文件上传出错，请重试！')
+        st.exception(e)
       st.write('图片尺寸')
       st.write(im.shape)
 

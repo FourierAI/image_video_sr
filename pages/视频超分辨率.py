@@ -21,7 +21,11 @@ if uploaded_file is not None:
     file_name = uploaded_file.name
 
     if is_video(file_name):
-      st.video(uploaded_file.getvalue())
+      try:
+        st.video(uploaded_file.getvalue())
+      except Exception:
+        e = RuntimeError('文件上传出错，请重试！')
+        st.exception(e)
       option = st.selectbox(
           '选择你需要的算法',
           ('最近邻插值算法', '双线性插值算法','双三次插值算法'))
